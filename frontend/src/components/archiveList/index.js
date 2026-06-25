@@ -676,8 +676,9 @@ class ArchiveList extends LitElement {
   }
 
   _applyCellSize() {
+    const wrapper = this._chartHost?.querySelector(".grid-body-content-wrapper");
     const main = this._chartHost?.querySelector(".grid-body-main");
-    if (!main) return;
+    if (!main || !wrapper) return;
 
     const columns = this.gridColumns || 1;
     const available = main.clientWidth;
@@ -689,9 +690,9 @@ class ArchiveList extends LitElement {
     );
 
     const rounded = Math.round(cell * 100) / 100;
-    main.style.setProperty("--cell-size", `${rounded}px`);
-    main.style.setProperty("--cell-gap", `${GAP_PX}px`);
-    main.style.setProperty("--grid-columns", String(columns));
+    wrapper.style.setProperty("--cell-size", `${rounded}px`);
+    wrapper.style.setProperty("--cell-gap", `${GAP_PX}px`);
+    wrapper.style.setProperty("--grid-columns", String(columns));
   }
 
   _onCellLeave(event) {
@@ -728,17 +729,17 @@ class ArchiveList extends LitElement {
         </div>
         <div class="activity-chart-scroll">
           <div class="grid-body">
-            <div class="grid-body-content-wrapper">
+            <div
+              class="grid-body-content-wrapper"
+              style="--grid-columns: ${this.gridColumns}; --cell-gap: ${GAP_PX}px"
+            >
               <div class="grid-body-aside" aria-hidden="true">
                 <span>日</span>
                 <span>二</span>
                 <span>四</span>
                 <span>六</span>
               </div>
-              <div
-                class="grid-body-main"
-                style="--grid-columns: ${this.gridColumns}; --cell-gap: ${GAP_PX}px"
-              >
+              <div class="grid-body-main">
                 <div class="grid-body-header">
                   ${this.monthLabels.map(
                     ({ month, column }, index) => html`<span
