@@ -5,7 +5,7 @@ export interface ParticleTemplate {
 
 export const AVATAR_BIN_MAGIC = "PAV1";
 export const AVATAR_PARSE_SIZE = 360;
-export const AVATAR_SAMPLE_STEP = 3;
+export const AVATAR_SAMPLE_STEP = 2;
 
 export function getSampleInterval(sampleStep: number, particleMargin = 0) {
   return sampleStep + particleMargin * 2;
