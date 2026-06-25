@@ -1,11 +1,12 @@
-export type {
-  ParticleTemplate,
-} from "@/lib/avatarParticles";
-export {
+import {
   AVATAR_PARSE_SIZE,
   AVATAR_SAMPLE_STEP,
   getSampleInterval,
+  type ParticleTemplate,
 } from "@/lib/avatarParticles";
+
+export type { ParticleTemplate };
+export { AVATAR_PARSE_SIZE, AVATAR_SAMPLE_STEP, getSampleInterval };
 
 export interface ParticleOptions {
   particleSize: number;
