@@ -35,7 +35,7 @@ bun run dev
 
 ## 目录
 
-- `content/markdown/` — 文章源
+- `content/markdown/` — 文章源（仓库为空目录，部署后通过 Admin 或挂载 volume 写入）
 - `frontend/` — Vite + Lit 前端源码
 - `src/` — Elysia 后端与管理端
 - `templates/` — 文章 / 归档 HTML 模板
