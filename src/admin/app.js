@@ -381,10 +381,33 @@ function segmentsToCategorySlug(segments) {
   return { category, slug };
 }
 
-function parseArticlePath(pathValue) {
+function decodePathSegment(segment) {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment;
+  }
+}
+
+function decodeRoutePath(pathValue) {
   const normalized = String(pathValue || "")
     .replace(/^\/+|\/+$/g, "")
     .replace(/\\/g, "/");
+  if (!normalized) return normalized;
+
+  return normalized
+    .split("/")
+    .filter(Boolean)
+    .map(decodePathSegment)
+    .join("/");
+}
+
+function encodeRouteSegments(...segments) {
+  return segments.filter(Boolean).map((segment) => encodeURIComponent(segment)).join("/");
+}
+
+function parseArticlePath(pathValue) {
+  const normalized = decodeRoutePath(pathValue);
   if (!normalized) return null;
 
   const segments = normalized.split("/").filter(Boolean);
@@ -691,7 +714,8 @@ function buildAdminPostApiPath(category, slug) {
   const cat = normalizeCategory(category);
   const s = normalizeSlug(slug);
   if (!cat || !s) return "";
-  return `/api/admin/posts/${cat.split("/").filter(Boolean).concat(s).join("/")}`;
+  const segments = cat.split("/").filter(Boolean).concat(s);
+  return `/api/admin/posts/${encodeRouteSegments(...segments)}`;
 }
 
 function setEditorTab(mode) {

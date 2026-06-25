@@ -492,5 +492,5 @@ export async function rebuildAll() {
 }
 
 export function articleUrl(category: string, slug: string) {
-  return `/${toPosixPath(category, slug)}`;
+  return buildArticlePath(category, slug);
 }

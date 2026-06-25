@@ -25,8 +25,27 @@ const EXT_BY_MIME: Record<string, string> = {
   "image/svg+xml": ".svg",
 };
 
+const ALLOWED_EXTENSIONS = new Set([
+  ".jpg",
+  ".jpeg",
+  ".png",
+  ".gif",
+  ".webp",
+  ".svg",
+]);
+
 function uploadsDir() {
   return config.uploadsDir;
+}
+
+export function isImageUploadFilename(filename: string) {
+  const safeName = path.basename(filename);
+  if (!safeName || safeName !== filename || safeName.startsWith(".")) {
+    return false;
+  }
+
+  const ext = path.extname(safeName).toLowerCase();
+  return ALLOWED_EXTENSIONS.has(ext);
 }
 
 function publicUrl(filename: string) {
@@ -88,6 +107,7 @@ export async function listUploads(): Promise<UploadItem[]> {
 
   for (const entry of entries) {
     if (!entry.isFile()) continue;
+    if (!isImageUploadFilename(entry.name)) continue;
     const absPath = path.join(uploadsDir(), entry.name);
     const stat = await fs.stat(absPath);
     items.push({
@@ -133,10 +153,11 @@ export async function saveUpload(file: File): Promise<UploadItem> {
 }
 
 export async function deleteUpload(filename: string) {
-  const safeName = path.basename(filename);
-  if (!safeName || safeName !== filename) {
+  if (!isImageUploadFilename(filename)) {
     throw new Error("无效的文件名");
   }
+
+  const safeName = path.basename(filename);
 
   const absPath = path.join(uploadsDir(), safeName);
   try {
@@ -147,6 +168,5 @@ export async function deleteUpload(filename: string) {
 }
 
 export function isAllowedUploadFilename(filename: string) {
-  const safeName = path.basename(filename);
-  return safeName === filename && safeName.length > 0;
+  return isImageUploadFilename(filename);
 }

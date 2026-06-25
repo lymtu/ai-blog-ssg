@@ -10,7 +10,7 @@ import { previewRoutes } from "./routes/admin/preview";
 import { exportRoutes } from "./routes/admin/export";
 import { uploadRoutes } from "./routes/admin/uploads";
 import { viewRoutes } from "./routes/views";
-import { parseArticlePath } from "./utils/articlePath";
+import { parseArticlePath, decodeRoutePath } from "./utils/articlePath";
 
 const adminIndex = Bun.file(path.join(config.adminDir, "index.html"));
 const adminApp = Bun.file(path.join(config.adminDir, "app.js"));
@@ -81,7 +81,8 @@ async function serveArticle(category: string, slug: string) {
 }
 
 async function serveArchive(categoryPath: string) {
-  const segments = categoryPath.split("/").filter(Boolean);
+  const decoded = decodeRoutePath(categoryPath);
+  const segments = decoded.split("/").filter(Boolean);
   if (segments.length === 0) return null;
   const fileName = `${segments.pop()}.html`;
   const relative = path.join("archive", ...segments, fileName);

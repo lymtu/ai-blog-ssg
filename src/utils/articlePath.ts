@@ -5,8 +5,35 @@ export interface ParsedArticlePath {
   slug: string;
 }
 
-export function parseArticlePath(path: string): ParsedArticlePath | null {
+function decodePathSegment(segment: string) {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment;
+  }
+}
+
+export function decodeRoutePath(path: string) {
   const normalized = path.replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
+  if (!normalized) return normalized;
+
+  return normalized
+    .split("/")
+    .filter(Boolean)
+    .map(decodePathSegment)
+    .join("/");
+}
+
+function encodeRouteSegment(segment: string) {
+  return encodeURIComponent(segment);
+}
+
+function encodeRouteSegments(...segments: string[]) {
+  return segments.filter(Boolean).map(encodeRouteSegment).join("/");
+}
+
+export function parseArticlePath(path: string): ParsedArticlePath | null {
+  const normalized = decodeRoutePath(path);
   if (!normalized) return null;
 
   const segments = normalized.split("/").filter(Boolean);
@@ -20,24 +47,33 @@ export function parseArticlePath(path: string): ParsedArticlePath | null {
 }
 
 export function buildArticlePath(category: string, slug: string) {
-  return `/${toPosixPath(category, slug)}`;
+  const normalizedCategory = category.replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
+  const normalizedSlug = slug.replace(/[/\\]/g, "-").trim();
+  const categorySegments = normalizedCategory.split("/").filter(Boolean);
+  return `/${encodeRouteSegments(...categorySegments, normalizedSlug)}`;
 }
 
 export function buildArchivePath(category: string) {
   const normalized = category.replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
-  return `/archive/${normalized}`;
+  const segments = normalized.split("/").filter(Boolean);
+  if (!segments.length) return "/archive";
+  return `/archive/${encodeRouteSegments(...segments)}`;
 }
 
 export function buildAdminPostApiPath(category: string, slug: string) {
-  return `/api/admin/posts/${toPosixPath(category, slug)}`;
+  return `/api/admin/posts/${encodeRouteSegments(
+    ...toPosixPath(category, slug).split("/").filter(Boolean),
+  )}`;
 }
 
 export function buildViewApiPath(category: string, slug: string) {
-  return `/api/posts/${toPosixPath(category, slug)}/view`;
+  return `/api/posts/${encodeRouteSegments(
+    ...toPosixPath(category, slug).split("/").filter(Boolean),
+  )}/view`;
 }
 
 export function parseViewApiPath(path: string): ParsedArticlePath | null {
-  const normalized = path.replace(/^\/+|\/+$/g, "").replace(/\\/g, "/");
+  const normalized = decodeRoutePath(path);
   if (!normalized.endsWith("/view")) return null;
   return parseArticlePath(normalized.slice(0, -"/view".length));
 }
