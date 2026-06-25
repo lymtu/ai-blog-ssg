@@ -1,0 +1,211 @@
+@import url("@/main.css");
+
+archive-list {
+  width: 80%;
+  max-width: 772px;
+  display: block;
+  margin: 0 auto !important;
+}
+
+archive-list > div > .archive-header h2,
+archive-list > div > h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 2.5rem 0 0;
+}
+
+.archive-header {
+  margin-bottom: 0;
+}
+
+.category-marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0.85rem 0 1.15rem;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+
+.category-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: category-marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+
+.category-marquee__track:hover,
+.category-marquee__track:focus-within {
+  animation-play-state: paused;
+}
+
+.category-marquee__group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+@keyframes category-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(
+      calc(-100% / var(--marquee-group-count, 4)),
+      0,
+      0
+    );
+  }
+}
+
+.category-tag {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 0.15s var(--ease),
+    border-color 0.15s var(--ease),
+    background-color 0.15s var(--ease);
+}
+
+.category-tag:hover {
+  color: var(--seal);
+  border-color: color-mix(in srgb, var(--seal) 35%, var(--line));
+  background: var(--seal-bg);
+}
+
+.control-panel {
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  display: flex;
+}
+
+.control-panel form input,
+.control-panel form button[type="submit"] {
+  box-sizing: border-box;
+  background-color: var(--surface);
+  height: 2.25rem;
+  color: var(--text-color);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  outline: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+}
+
+.control-panel form input:hover {
+  border-color: var(--line-strong);
+}
+
+.control-panel form input:focus,
+.control-panel form button[type="submit"]:focus-visible {
+  border-color: var(--seal);
+  box-shadow: 0 0 0 3px var(--seal-bg);
+}
+
+.control-panel form {
+  align-items: center;
+  display: flex;
+}
+
+.control-panel form input {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  padding: 0 0.6rem;
+}
+
+.control-panel form input {
+  width: 10rem;
+}
+
+.control-panel form button[type="submit"] {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-left: none;
+  width: 2.25rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.control-panel form button[type="submit"]:hover {
+  background-color: var(--btn-hover-bg-color);
+}
+
+.clear-filter {
+  color: var(--seal);
+  cursor: pointer;
+  background: var(--seal-bg);
+  border: 1px solid color-mix(in srgb, var(--seal) 35%, var(--line));
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 0.85rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.15s var(--ease);
+}
+
+.clear-filter:hover {
+  background-color: color-mix(in srgb, var(--seal) 18%, transparent);
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .category-marquee__group:not(:first-child) {
+    display: none;
+  }
+
+  .category-marquee {
+    mask-image: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+}
+
+@media (width <= 640px) {
+  archive-list {
+    width: min(92%, 100%);
+  }
+
+  .control-panel {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

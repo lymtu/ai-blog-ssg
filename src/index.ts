@@ -1,7 +1,16 @@
-import { Elysia } from "elysia";
+import { createApp } from "./app";
+import { config } from "./config";
+import { ensureDirs, rebuildAll } from "./services/ssg";
+import { warnInsecureDefaults } from "./utils/security";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+warnInsecureDefaults();
+await ensureDirs();
+await rebuildAll();
+
+const app = createApp().listen(config.port);
 
 console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+  `Blog SSG is running at http://${app.server?.hostname}:${app.server?.port}`,
 );
+
+export type App = typeof app;

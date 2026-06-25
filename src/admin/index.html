@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>博客管理</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <link rel="stylesheet" href="/admin/admin-preview.css" />
+  </head>
+  <body class="admin-app">
+    <header class="bar">
+      <div class="bar__brand">
+        <h1>博客管理</h1>
+        <p class="bar__subtitle" id="bar-subtitle">内容后台</p>
+      </div>
+      <div class="actions">
+        <a href="/" class="btn btn-ghost" target="_blank" rel="noopener">查看站点</a>
+        <button id="logout-btn" class="btn btn-ghost hidden" type="button">退出登录</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="login-view" class="login-wrap">
+        <div class="card card--login">
+          <h2>登录</h2>
+          <p class="card__lead">使用管理员账号进入内容后台</p>
+          <form id="login-form">
+            <label for="username">用户名</label>
+            <input id="username" name="username" autocomplete="username" required />
+
+            <label for="password">密码</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button type="submit" class="primary btn-block" id="login-submit">登录</button>
+            <p id="login-error" class="error" role="alert"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="dashboard-view" class="hidden">
+        <div class="toolbar">
+          <div class="toolbar__left">
+            <button id="new-post-btn" class="primary" type="button">新建文章</button>
+            <button id="media-btn" type="button">图片管理</button>
+            <button id="export-btn" type="button">导出 MD 目录</button>
+          </div>
+          <div class="toolbar__right">
+            <label class="search" for="search-input">
+              <span class="search__icon" aria-hidden="true">⌕</span>
+              <input
+                id="search-input"
+                type="search"
+                placeholder="搜索标题或路径…"
+                autocomplete="off"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="stats" id="posts-stats"></div>
+
+        <div class="card card--flush">
+          <div id="posts-loading" class="state state--loading hidden">加载中…</div>
+          <div id="posts-empty" class="state state--empty hidden">
+            <p>还没有文章</p>
+            <button type="button" class="primary" id="empty-new-btn">创建第一篇</button>
+          </div>
+          <div id="posts-list" class="post-list" role="list"></div>
+        </div>
+      </section>
+
+      <section id="media-view" class="hidden">
+        <div class="toolbar toolbar--editor">
+          <button id="media-back-btn" type="button" class="btn-ghost">← 返回列表</button>
+        </div>
+
+        <div class="card">
+          <div class="media-head">
+            <div>
+              <h2>图片管理</h2>
+              <p class="card__lead">上传的图片保存在 <code>/assets/uploads/</code>，可在 Markdown 中引用</p>
+            </div>
+            <label class="media-upload-btn primary">
+              上传图片
+              <input
+                id="media-upload-input"
+                type="file"
+                accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+                multiple
+                hidden
+              />
+            </label>
+          </div>
+
+          <div
+            id="media-dropzone"
+            class="media-dropzone"
+            tabindex="0"
+            role="region"
+            aria-label="拖拽上传图片"
+          >
+            <p class="media-dropzone__title">拖拽图片到此处上传</p>
+            <p class="media-dropzone__hint">支持 JPG、PNG、GIF、WebP、SVG，单张最大 5MB</p>
+          </div>
+
+          <div id="media-loading" class="state state--loading hidden">加载中…</div>
+          <div id="media-empty" class="state state--empty hidden">
+            <p>还没有上传图片</p>
+          </div>
+          <div id="media-grid" class="media-grid" role="list"></div>
+        </div>
+      </section>
+
+      <section id="editor-view" class="hidden">
+        <div class="toolbar toolbar--editor">
+          <button id="back-btn" type="button" class="btn-ghost">← 返回列表</button>
+        </div>
+
+        <div class="card">
+          <h2 id="editor-title">编辑文章</h2>
+          <p class="card__lead" id="editor-lead">保存后将重新生成静态 HTML</p>
+          <form id="editor-form">
+            <div class="path-field">
+              <label id="path-label">文章路径</label>
+              <div class="path-builder">
+                <div
+                  class="path-builder__segments"
+                  id="path-segments"
+                  role="group"
+                  aria-labelledby="path-label"
+                ></div>
+              </div>
+              <p class="field-hint">
+                从左到右逐级填写，最后一级为文件名；点击每级右侧 + 在该级后面插入新一级
+              </p>
+            </div>
+
+            <label for="title">标题</label>
+            <input id="title" name="title" required />
+
+            <label for="description">摘要 (SEO description)</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="3"
+              placeholder="留空则从正文首段自动截取"
+            ></textarea>
+
+            <div class="grid-2">
+              <div>
+                <label for="date">创建时间</label>
+                <input id="date" name="date" type="datetime-local" required />
+              </div>
+              <div>
+                <label for="updated">更新时间</label>
+                <input id="updated" name="updated" type="text" readonly />
+              </div>
+            </div>
+
+            <div class="editor-compose">
+              <div class="editor-compose__panel editor-compose__panel--edit">
+                <div class="editor-compose__head">
+                  <label for="body">Markdown 正文</label>
+                  <div class="editor-compose__tools">
+                    <button type="button" id="insert-image-btn" class="btn-ghost btn-sm">
+                      插入图片
+                    </button>
+                    <div class="editor-tabs" role="tablist" aria-label="编辑模式">
+                      <button
+                        type="button"
+                        class="editor-tab is-active"
+                        data-editor-tab="edit"
+                        role="tab"
+                        aria-selected="true"
+                      >
+                        编辑
+                      </button>
+                      <button
+                        type="button"
+                        class="editor-tab"
+                        data-editor-tab="preview"
+                        role="tab"
+                        aria-selected="false"
+                      >
+                        预览
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <textarea id="body" name="body" required spellcheck="false"></textarea>
+              </div>
+              <div class="editor-compose__panel editor-compose__panel--preview" aria-live="polite">
+                <p class="editor-compose__head">实时预览</p>
+                <div id="preview-pane" class="preview-pane">
+                  <p class="preview-pane__placeholder">输入 Markdown 后将在此显示预览</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="primary" id="editor-submit">保存</button>
+              <button type="button" id="editor-cancel" class="btn-ghost">取消</button>
+            </div>
+            <p id="editor-error" class="error" role="alert"></p>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <div id="delete-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__panel card">
+        <h3 id="delete-modal-title">确认删除</h3>
+        <p id="delete-modal-text" class="modal__text"></p>
+        <div class="modal__actions">
+          <button type="button" class="danger" id="delete-confirm">确认删除</button>
+          <button type="button" class="btn-ghost" data-close-modal>取消</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="image-picker-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="image-picker-title">
+      <div class="modal__backdrop" data-close-image-picker></div>
+      <div class="modal__panel card modal__panel--wide">
+        <div class="media-head media-head--compact">
+          <div>
+            <h3 id="image-picker-title">插入图片</h3>
+            <p class="card__lead">选择已有图片或上传新图片，将 Markdown 插入到光标处</p>
+          </div>
+          <label class="media-upload-btn">
+            上传
+            <input
+              id="picker-upload-input"
+              type="file"
+              accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+              multiple
+              hidden
+            />
+          </label>
+        </div>
+        <div id="picker-loading" class="state state--loading hidden">加载中…</div>
+        <div id="picker-empty" class="state state--empty hidden">暂无图片，请先上传</div>
+        <div id="picker-grid" class="media-grid media-grid--picker"></div>
+        <div class="modal__actions">
+          <button type="button" class="btn-ghost" data-close-image-picker>关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/assets/article-mermaid.js"></script>
+    <script type="module" src="/admin/app.js"></script>
+  </body>
+</html>

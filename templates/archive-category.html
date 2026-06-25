@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{seoHead}}
+    <meta name="description" content="[ {{category}} ] 分类归档" />
+    <link rel="stylesheet" href="/assets/root.css" />
+    <link rel="stylesheet" href="/assets/mainCss.css" />
+    <link rel="stylesheet" href="/assets/subpage.css" />
+    <link rel="stylesheet" href="/assets/archive.css" />
+    <script type="module" src="/assets/header.js"></script>
+    <title>[ {{category}} ] 归档</title>
+  </head>
+  <body>
+    <my-header></my-header>
+    <main class="content">
+      <a href="/" class="page-back">
+        <span class="page-back__arrow" aria-hidden="true">←</span>
+        返回首页
+      </a>
+      <header class="archive-hero">
+        <h1 class="archive-tag">[ {{category}} ]</h1>
+        <p class="archive-count">共 {{count}} 篇文章</p>
+      </header>
+      <ul class="archive-list">
+        {{list}}
+      </ul>
+      <nav class="archive-pagination" aria-label="归档分页" hidden></nav>
+      <script type="application/json" id="archive-data">{{archiveData}}</script>
+    </main>
+    <footer>- End -</footer>
+    <script type="module" src="/assets/archive-pagination.js"></script>
+  </body>
+</html>

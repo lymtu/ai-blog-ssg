@@ -1,15 +1,31 @@
 {
-  "name": "app",
-  "version": "1.0.50",
+  "name": "blog-ssg",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "dev:frontend": "cd frontend && bun run dev",
+    "build:frontend": "cd frontend && bun install && bun run build",
+    "build": "bun run build:frontend && bun run src/scripts/sync-index.ts",
+    "seed": "bun run src/scripts/seed-sample-posts.ts",
+    "start": "bun run src/index.ts",
+    "preview": "bun run build:frontend && bun run start",
+    "test": "bun test src/"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "latest",
+    "@elysiajs/jwt": "latest",
+    "@elysiajs/static": "^1.4.10",
+    "archiver": "^7.0.1",
+    "bcryptjs": "^3.0.2",
+    "elysia": "latest",
+    "fast-glob": "^3.3.3",
+    "marked": "^17.0.5",
+    "shiki": "^4.2.0"
   },
   "devDependencies": {
+    "@types/archiver": "^6.0.3",
+    "@types/bcryptjs": "^2.4.6",
     "bun-types": "latest"
-  },
-  "module": "src/index.js"
+  }
 }

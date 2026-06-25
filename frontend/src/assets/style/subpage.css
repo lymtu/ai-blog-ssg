@@ -1,0 +1,43 @@
+.page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.75rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color 0.18s var(--ease),
+    border-color 0.18s var(--ease),
+    transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease);
+}
+
+.page-back:hover {
+  color: var(--seal);
+  border-color: color-mix(in srgb, var(--seal) 35%, var(--line));
+  box-shadow: var(--shadow-2);
+  transform: translateX(-2px);
+  text-decoration: none;
+}
+
+.page-back__arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-back {
+    transition: none;
+  }
+  .page-back:hover {
+    transform: none;
+  }
+}

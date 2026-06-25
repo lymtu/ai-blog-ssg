@@ -1,0 +1,34 @@
+@import url("@/main.css");
+
+:host {
+  width: fit-content;
+  height: fit-content;
+}
+pre.container {
+  white-space: pre-line;
+  width: 300px;
+  height: fit-content;
+  margin: 0 auto;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.6;
+}
+.cursor {
+  color: var(--seal);
+  font-weight: 400;
+  animation: 1s steps(1, end) infinite blink;
+  display: inline-block;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}

@@ -1,0 +1,171 @@
+/* ============================================================
+   Apple-style design tokens
+   System typography, neutral surfaces, a single system-blue
+   accent. Legacy variable names are kept stable so existing
+   components retint automatically.
+   ============================================================ */
+
+:root,
+:root[data-theme="light"] {
+  /* Core (legacy names, retinted) */
+  --text-color: #1d1d1f;
+  --background-color: #f5f5f7;
+  --link-color: #0071e3;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --avatar-bg-color: #ffffff;
+  --btn-bg-color: #e8e8ed;
+  --btn-hover-bg-color: #dedee3;
+  --btn-active-bg-color: #d2d2d7;
+
+  /* Surfaces & text */
+  --surface: #ffffff;
+  --surface-2: #f5f5f7;
+  --ink-soft: #6e6e73;
+  --ink-faint: #86868b;
+  --line: rgba(0, 0, 0, 0.1);
+  --line-strong: rgba(0, 0, 0, 0.16);
+
+  /* Accent (system blue) — variable kept as --seal for stability */
+  --seal: #0071e3;
+  --seal-strong: #0058b0;
+  --seal-bg: rgba(0, 113, 227, 0.1);
+
+  /* Heatmap: soft gray -> system blue */
+  --contribution-default-bgColor-0: #eceef1;
+  --contribution-default-bgColor-1: #cfe6ff;
+  --contribution-default-bgColor-2: #9bcbff;
+  --contribution-default-bgColor-3: #5aa9f6;
+  --contribution-default-bgColor-4: #1f80e0;
+  --cell-border: rgba(0, 0, 0, 0.05);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-2: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  --code-block-bg: #eef1f5;
+
+  --light: block;
+  --dark: none;
+
+  --particle-color: #48484a;
+  --social-icon-filter: none;
+}
+
+:root[data-theme="dark"] {
+  --text-color: #f5f5f7;
+  --background-color: #000000;
+  --link-color: #2997ff;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+  --avatar-bg-color: #1d1d1f;
+  --btn-bg-color: #2c2c2e;
+  --btn-hover-bg-color: #3a3a3c;
+  --btn-active-bg-color: #48484a;
+
+  --surface: #1d1d1f;
+  --surface-2: #161617;
+  --ink-soft: #a1a1a6;
+  --ink-faint: #86868b;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.22);
+
+  --seal: #2997ff;
+  --seal-strong: #5aacff;
+  --seal-bg: rgba(41, 151, 255, 0.16);
+
+  --contribution-default-bgColor-0: #2a2a2c;
+  --contribution-default-bgColor-1: #14416f;
+  --contribution-default-bgColor-2: #2272cf;
+  --contribution-default-bgColor-3: #56a6ff;
+  --contribution-default-bgColor-4: #9fcbff;
+  --cell-border: rgba(255, 255, 255, 0.06);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 8px 30px rgba(0, 0, 0, 0.6);
+
+  --code-block-bg: #141416;
+
+  --light: none;
+  --dark: block;
+
+  --particle-color: #8e8e93;
+  --social-icon-filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #f5f5f7;
+    --background-color: #000000;
+    --link-color: #2997ff;
+    --shadow-color: rgba(0, 0, 0, 0.6);
+    --avatar-bg-color: #1d1d1f;
+    --btn-bg-color: #2c2c2e;
+    --btn-hover-bg-color: #3a3a3c;
+    --btn-active-bg-color: #48484a;
+
+    --surface: #1d1d1f;
+    --surface-2: #161617;
+    --ink-soft: #a1a1a6;
+    --ink-faint: #86868b;
+    --line: rgba(255, 255, 255, 0.12);
+    --line-strong: rgba(255, 255, 255, 0.22);
+
+    --seal: #2997ff;
+    --seal-strong: #5aacff;
+    --seal-bg: rgba(41, 151, 255, 0.16);
+
+    --contribution-default-bgColor-0: #2a2a2c;
+    --contribution-default-bgColor-1: #14416f;
+    --contribution-default-bgColor-2: #2272cf;
+    --contribution-default-bgColor-3: #56a6ff;
+    --contribution-default-bgColor-4: #9fcbff;
+    --cell-border: rgba(255, 255, 255, 0.06);
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-2: 0 8px 30px rgba(0, 0, 0, 0.6);
+
+    --code-block-bg: #141416;
+
+    --light: none;
+    --dark: block;
+
+    --particle-color: #8e8e93;
+    --social-icon-filter: invert(1);
+  }
+}
+
+:root {
+  /* Type & rhythm (shared across themes) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "PingFang SC", "Helvetica Neue", Helvetica, Arial,
+    "Microsoft YaHei", sans-serif;
+  --font-hand: "Aa今日花晴 春懒猫困", var(--font-sans);
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas,
+    monospace;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 980px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  --ease: cubic-bezier(0.28, 0.11, 0.32, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  position: relative;
+}

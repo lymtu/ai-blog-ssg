@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SSG:SEO_HEAD -->
+    <link rel="stylesheet" href="/src/root.css" />
+    <link rel="stylesheet" href="/src/main.css" />
+    <title>主页</title>
+    <link rel="stylesheet" href="/src/assets/style/index.css" />
+    <link rel="stylesheet" href="/src/components/archiveList/style.css" />
+    <link rel="stylesheet" href="/src/components/archiveList/form.css" />
+    <link rel="stylesheet" href="/src/assets/style/mdList.css" />
+    <link rel="stylesheet" href="/src/assets/style/pagination.css" />
+    <meta name="description" content="Lymtu的博客，记录一些东西。" />
+    <script type="module" src="/src/components/header/index.js"></script>
+    <script type="module" src="/src/components/typewriter/index.js"></script>
+    <script type="module" src="/src/components/archiveList/index.js"></script>
+    <script type="module" src="/src/components/particleAvatar/index.ts"></script>
+  </head>
+  <body>
+    <my-header></my-header>
+    <main>
+      <section class="home-container container">
+        <div class="typewriter-container">
+          <my-typewriter></my-typewriter>
+        </div>
+
+        <div class="avatar-container">
+          <my-particle-avatar></my-particle-avatar>
+        </div>
+
+        <div class="links-container">
+          <ul>
+            <li>
+              <a
+                href="https://github.com/lymtu"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><img src="/src/assets/img/github.svg" alt="GitHub"
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="container archive-section">
+        <archive-list></archive-list>
+      </section>
+    </main>
+    <footer>- End -</footer>
+    <script type="application/json" id="site-md-info"><!-- SSG:MD_INFO --></script>
+  </body>
+</html>

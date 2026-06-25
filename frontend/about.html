@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- SSG:SEO_HEAD -->
+    <link rel="stylesheet" href="/src/root.css" />
+    <link rel="stylesheet" href="/src/main.css" />
+    <title>关于</title>
+    <script type="module" src="/src/components/header/index.js"></script>
+    <link rel="stylesheet" href="/src/assets/style/subpage.css" />
+    <link rel="stylesheet" href="/src/assets/style/about.css" />
+  </head>
+  <body>
+    <my-header></my-header>
+    <main class="content">
+      <a href="/" class="page-back">
+        <span class="page-back__arrow" aria-hidden="true">←</span>
+        返回首页
+      </a>
+
+      <header class="about-hero">
+        <h1>关于</h1>
+        <p class="lede">
+          一个用来存放杂七杂八想法的地方，也是一块练习新工具的试验田。
+        </p>
+      </header>
+
+      <section>
+        <h2>关于本站</h2>
+        <p>这是一个以 Markdown 为唯一内容源的 SSG 博客，构建在这套技术栈之上：</p>
+        <ul class="stack">
+          <li>
+            <a href="https://bun.sh/" target="_blank" rel="noopener noreferrer">
+              <img src="/src/assets/img/bun.svg" alt="" />
+              <span>Bun</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://elysiajs.com/" target="_blank" rel="noopener noreferrer">
+              <img src="/src/assets/img/elysia.svg" alt="" />
+              <span>Elysia</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://cn.vitejs.dev/" target="_blank" rel="noopener noreferrer">
+              <img src="/favicon.svg" alt="" />
+              <span>Vite</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://lit.tips/" target="_blank" rel="noopener noreferrer">
+              <img src="/src/assets/img/lit.svg" alt="" />
+              <span>Lit</span>
+            </a>
+          </li>
+        </ul>
+        <p>
+          管理端完成文章增删改后，会即时生成 HTML 并更新目录数据，无需手动重建。
+        </p>
+      </section>
+    </main>
+    <footer>- End -</footer>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+.archive-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 0.25rem;
+}
+
+.archive-pagination[hidden] {
+  display: none;
+}
+
+.archive-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  color: var(--text-color);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.18s var(--ease),
+    border-color 0.18s var(--ease),
+    background-color 0.18s var(--ease),
+    box-shadow 0.18s var(--ease),
+    transform 0.18s var(--ease);
+}
+
+.archive-pagination__btn:hover:not(:disabled) {
+  color: var(--seal);
+  border-color: color-mix(in srgb, var(--seal) 35%, var(--line));
+  background: color-mix(in srgb, var(--seal-bg) 55%, var(--surface));
+  box-shadow: var(--shadow-2);
+  transform: translateY(-1px);
+}
+
+.archive-pagination__btn:active:not(:disabled) {
+  transform: translateY(0);
+  background: var(--btn-active-bg-color);
+}
+
+.archive-pagination__btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.archive-pagination__icon {
+  font-size: 0.95rem;
+  line-height: 1;
+  opacity: 0.72;
+}
+
+.archive-pagination__info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 5.5rem;
+  justify-content: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.archive-pagination__current {
+  color: var(--seal);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-pagination__btn {
+    transition: none;
+  }
+
+  .archive-pagination__btn:hover:not(:disabled) {
+    transform: none;
+  }
+}

@@ -1,0 +1,166 @@
+@import "./pagination.css";
+
+main.content {
+  padding-block: 3.5rem 1rem;
+  max-width: 720px;
+}
+
+.archive-hero {
+  margin-bottom: 1.75rem;
+}
+
+.archive-tag {
+  display: inline-block;
+  margin: 0;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--ink-soft);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+.archive-count {
+  margin: 0.75rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.archive-list {
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  list-style: none;
+  padding: 0;
+}
+
+.archive-list li {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  transition:
+    transform 0.18s var(--ease),
+    border-color 0.18s var(--ease),
+    box-shadow 0.18s var(--ease);
+}
+
+.archive-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.archive-list li > a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.archive-list li > a:hover {
+  text-decoration: none;
+}
+
+.archive-list .dir {
+  flex-shrink: 0;
+  max-width: 8rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.archive-list .basename {
+  flex-grow: 1;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.archive-list li:hover .basename {
+  color: var(--seal);
+}
+
+.archive-list .birthtime {
+  flex-shrink: 0;
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-list .views {
+  flex-shrink: 0;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-list .arrow {
+  width: 1.25rem;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition:
+    transform 0.18s var(--ease),
+    opacity 0.18s var(--ease);
+}
+
+.archive-list li:hover .arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.archive-list li.empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px dashed var(--line-strong);
+  box-shadow: none;
+}
+
+.archive-list li.empty:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (width <= 640px) {
+  .archive-list .dir,
+  .archive-list .views {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-list li,
+  .archive-list .arrow {
+    transition: none;
+  }
+
+  .archive-list li:hover {
+    transform: none;
+  }
+
+  .archive-list li:hover .arrow {
+    transform: none;
+  }
+}

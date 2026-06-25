@@ -1,0 +1,121 @@
+section.container {
+  min-height: calc(100vh - 55.33px);
+}
+
+section.home-container {
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  gap: 1rem;
+}
+
+.typewriter-container {
+  height: 6rem;
+  margin: auto auto 2rem;
+}
+
+.avatar-container {
+  grid-area: 1/2 / span 2 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.avatar-container my-particle-avatar {
+  width: 440px;
+  height: 440px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.avatar-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.links-container {
+  width: fit-content;
+  margin: 1rem auto auto;
+}
+
+.links-container ul {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.links-container li {
+  width: fit-content;
+}
+
+.links-container li a {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
+    background-color 0.2s var(--ease);
+}
+
+.links-container li a:hover {
+  transform: translateY(-2px);
+  background: var(--btn-bg-color);
+  box-shadow: var(--shadow-2);
+}
+
+.links-container li a img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: var(--social-icon-filter);
+}
+
+@media (width<=650px) {
+  section.home-container {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem 0;
+    display: flex;
+  }
+  .typewriter-container,
+  .links-container {
+    width: fit-content;
+    margin: 0;
+  }
+  .avatar-container my-particle-avatar {
+    width: 320px;
+    height: 320px;
+  }
+  .links-container {
+    height: fit-content;
+  }
+}
+
+.title-container {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+section.list-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .links-container li a {
+    transition: none;
+  }
+  .links-container li a:hover {
+    transform: none;
+  }
+}

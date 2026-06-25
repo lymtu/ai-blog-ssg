@@ -1,0 +1,205 @@
+/* Scoped Markdown preview — does not affect admin chrome */
+
+.preview-pane {
+  --pv-text: var(--text);
+  --pv-muted: var(--muted);
+  --pv-line: var(--line);
+  --pv-surface: var(--surface);
+  --pv-surface-2: var(--surface-2);
+  --pv-accent: var(--accent);
+  --pv-accent-bg: var(--accent-bg);
+  --pv-code-bg: color-mix(in srgb, var(--surface-2) 88%, var(--text) 12%);
+  --pv-mono: var(--mono);
+}
+
+.preview-pane .article-content {
+  max-width: none;
+  margin: 0;
+  line-height: 1.75;
+  font-size: 0.95rem;
+  color: var(--pv-text);
+}
+
+.preview-pane .article-content h1,
+.preview-pane .article-content h2,
+.preview-pane .article-content h3,
+.preview-pane .article-content h4 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  margin: 1.75rem 0 0.75rem;
+}
+
+.preview-pane .article-content h2 {
+  font-size: 1.35rem;
+}
+
+.preview-pane .article-content h3 {
+  font-size: 1.15rem;
+}
+
+.preview-pane .article-content h4 {
+  font-size: 1.05rem;
+}
+
+.preview-pane .article-content p {
+  margin: 0.85rem 0;
+}
+
+.preview-pane .article-content ul,
+.preview-pane .article-content ol {
+  margin: 0.85rem 0;
+  padding-left: 1.35rem;
+}
+
+.preview-pane .article-content li {
+  margin: 0.3rem 0;
+}
+
+.preview-pane .article-content blockquote {
+  margin: 1.25rem 0;
+  padding: 0.65rem 0.95rem;
+  border-left: 3px solid var(--pv-accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--pv-accent-bg);
+  color: var(--pv-muted);
+}
+
+.preview-pane .article-content :not(pre) > code {
+  padding: 0.12rem 0.4rem;
+  border-radius: 5px;
+  border: 1px solid var(--pv-line);
+  background: var(--pv-surface-2);
+  font-family: var(--pv-mono);
+  font-size: 0.88em;
+  color: var(--pv-accent);
+}
+
+.preview-pane .article-content a {
+  color: var(--pv-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.preview-pane .article-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem 0;
+  border-radius: 10px;
+  border: 1px solid var(--pv-line);
+}
+
+.preview-pane .article-content hr {
+  margin: 1.75rem 0;
+  border: none;
+  border-top: 1px solid var(--pv-line);
+}
+
+.preview-pane .article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.9rem;
+}
+
+.preview-pane .article-content th,
+.preview-pane .article-content td {
+  border: 1px solid var(--pv-line);
+  padding: 0.45rem 0.65rem;
+  text-align: left;
+}
+
+.preview-pane .article-content thead {
+  background: var(--pv-surface-2);
+}
+
+.preview-pane .code-block {
+  margin: 1.25rem 0;
+  border: 1px solid var(--pv-line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--pv-surface);
+}
+
+.preview-pane .code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid var(--pv-line);
+  background: var(--pv-surface-2);
+}
+
+.preview-pane .code-block__lang {
+  font-family: var(--pv-mono);
+  font-size: 0.75rem;
+  color: var(--pv-muted);
+}
+
+.preview-pane .code-block__copy {
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid var(--pv-line);
+  border-radius: 6px;
+  background: var(--pv-surface);
+  color: var(--pv-muted);
+  padding: 0.15rem 0.5rem;
+  font-size: 0.72rem;
+}
+
+.preview-pane .code-block__body {
+  background: var(--pv-code-bg);
+  overflow-x: auto;
+}
+
+.preview-pane .code-block__body pre {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  font-family: var(--pv-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.preview-pane .code-block__source {
+  display: none !important;
+}
+
+.preview-pane .article-toc {
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--pv-line);
+  border-radius: 10px;
+  background: var(--pv-surface-2);
+  font-size: 0.85rem;
+}
+
+.preview-pane .article-toc__label,
+.preview-pane .article-toc__summary {
+  font-weight: 600;
+  color: var(--pv-muted);
+}
+
+.preview-pane .article-toc__list,
+.preview-pane .article-toc__sublist {
+  margin: 0.5rem 0 0;
+  padding-left: 1rem;
+  list-style: none;
+}
+
+.preview-pane .article-toc__sublist {
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--pv-line);
+}
+
+.preview-pane .article-toc__item a {
+  display: block;
+  padding: 0.2rem 0;
+  color: var(--pv-muted);
+  text-decoration: none;
+}
+
+.preview-pane .article-toc__item a:hover {
+  color: var(--pv-accent);
+}

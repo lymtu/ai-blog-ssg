@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="/src/root.css" />
+    <link rel="stylesheet" href="/src/main.css" />
+    <title>页面未找到</title>
+    <script type="module" src="/src/components/header/index.js"></script>
+    <link rel="stylesheet" href="/src/assets/style/subpage.css" />
+    <link rel="stylesheet" href="/src/assets/style/not-found.css" />
+  </head>
+  <body>
+    <my-header></my-header>
+    <main class="content">
+      <a href="/" class="page-back">
+        <span class="page-back__arrow" aria-hidden="true">←</span>
+        返回首页
+      </a>
+
+      <header class="not-found-hero">
+        <p class="code" aria-hidden="true">404</p>
+        <h1>页面未找到</h1>
+        <p class="lede">你要访问的内容可能已被移动或删除，可以先回到首页继续浏览。</p>
+      </header>
+
+      <nav class="not-found-actions" aria-label="快捷导航">
+        <a href="/" class="primary">回到首页</a>
+        <a href="/about">关于本站</a>
+      </nav>
+    </main>
+    <footer>- End -</footer>
+  </body>
+</html>

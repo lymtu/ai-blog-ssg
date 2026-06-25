@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+button {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0.45rem;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.15s var(--ease), transform 0.15s var(--ease);
+}
+
+button:hover {
+  background: var(--btn-hover-bg-color);
+}
+
+button:active {
+  transform: scale(0.92);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 2px;
+}
+
+button img {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: background-color 0.15s var(--ease);
+  }
+  button:active {
+    transform: none;
+  }
+}
