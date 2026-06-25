@@ -1,7 +1,9 @@
+import { decodeParticleTemplates } from "@/lib/avatarParticles";
 import type { ParticleOptions, ParticleTemplate } from "./types";
 import { getSampleInterval } from "./types";
 
-export async function createParticlesFromBuffer(
+/** @deprecated Legacy PNG path; build now emits pre-sampled PAV1 me.bin. */
+async function createParticlesFromPng(
   buffer: ArrayBuffer,
   options: ParticleOptions,
 ): Promise<ParticleTemplate[]> {
@@ -50,4 +52,14 @@ export async function createParticlesFromBuffer(
   }
 
   return templates;
+}
+
+export async function createParticlesFromBuffer(
+  buffer: ArrayBuffer,
+  options: ParticleOptions,
+): Promise<ParticleTemplate[]> {
+  const decoded = decodeParticleTemplates(buffer);
+  if (decoded) return decoded;
+
+  return createParticlesFromPng(buffer, options);
 }

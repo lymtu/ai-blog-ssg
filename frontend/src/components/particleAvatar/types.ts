@@ -1,3 +1,12 @@
+export type {
+  ParticleTemplate,
+} from "@/lib/avatarParticles";
+export {
+  AVATAR_PARSE_SIZE,
+  AVATAR_SAMPLE_STEP,
+  getSampleInterval,
+} from "@/lib/avatarParticles";
+
 export interface ParticleOptions {
   particleSize: number;
   particleMargin: number;
@@ -8,28 +17,15 @@ export interface ParticleOptions {
   tintColor: string;
 }
 
-export interface ParticleTemplate {
-  originX: number;
-  originY: number;
-}
-
 export interface MousePosition {
   x: number;
   y: number;
 }
 
-export const AVATAR_PARSE_SIZE = 360;
-
-export function getSampleInterval(
-  options: Pick<ParticleOptions, "sampleStep" | "particleMargin">,
-) {
-  return options.sampleStep + options.particleMargin * 2;
-}
-
 export const DEFAULT_PARTICLE_OPTIONS: ParticleOptions = {
   particleSize: 2,
   particleMargin: 0,
-  sampleStep: 2,
+  sampleStep: AVATAR_SAMPLE_STEP,
   maxSize: AVATAR_PARSE_SIZE,
   particleAcceleration: 0.05,
   mouseInfluenceRange: 50,
