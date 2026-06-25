@@ -62,11 +62,12 @@ async function servePublic(relativePath: string, contentType?: string) {
   }
 
   const file = Bun.file(filePath);
-  return new Response(file, {
-    headers: {
-      "content-type": contentType ?? getContentType(relativePath, file),
-    },
-  });
+  const type = contentType ?? getContentType(relativePath, file);
+  const headers: Record<string, string> = { "content-type": type };
+  if (file.size >= 0) {
+    headers["content-length"] = String(file.size);
+  }
+  return new Response(file, { headers });
 }
 
 async function serveNotFound(set: { status?: number | string }) {
