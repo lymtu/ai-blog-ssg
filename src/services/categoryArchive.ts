@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import fg from "fast-glob";
 import { config } from "../config";
+import { applyTemplateTokens } from "../utils/templateReplace";
 import { buildArchivePath, buildArticlePath } from "../utils/articlePath";
 import { escapeHtml, formatDate, type ArticleMeta } from "./ssg";
 import { absoluteUrl, buildSeoHeadBlock } from "./seoHead";
@@ -66,16 +67,14 @@ export async function generateCategoryArchives(articles: ArticleMeta[]) {
       .filter((article) => article.type === category)
       .sort((a, b) => b.birthTime - a.birthTime);
 
-    const html = template
-      .replaceAll("{{category}}", escapeHtml(category))
-      .replaceAll("{{archivePath}}", escapeHtml(buildArchivePath(category)))
-      .replaceAll(
-        "{{seoHead}}",
-        buildSeoHeadBlock(absoluteUrl(buildArchivePath(category))),
-      )
-      .replaceAll("{{count}}", String(inCategory.length))
-      .replaceAll("{{list}}", renderArchiveList(inCategory))
-      .replaceAll("{{archiveData}}", buildArchiveDataJson(inCategory, category));
+    const html = applyTemplateTokens(template, {
+      "{{category}}": escapeHtml(category),
+      "{{archivePath}}": escapeHtml(buildArchivePath(category)),
+      "{{seoHead}}": buildSeoHeadBlock(absoluteUrl(buildArchivePath(category))),
+      "{{count}}": String(inCategory.length),
+      "{{list}}": renderArchiveList(inCategory),
+      "{{archiveData}}": buildArchiveDataJson(inCategory, category),
+    });
 
     const outputPath = archiveHtmlPath(category);
     await fs.mkdir(path.dirname(outputPath), { recursive: true });

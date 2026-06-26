@@ -9,6 +9,7 @@ import { mergeViewsIntoArticles } from "./views";
 import { generateCategoryArchives } from "./categoryArchive";
 import { ensureUploadsDir } from "./uploads";
 import { generateSeoFiles } from "./seo";
+import { applyTemplateTokens } from "../utils/templateReplace";
 import { buildArchivePath, buildArticlePath } from "../utils/articlePath";
 import { buildSeoHeadBlock, absoluteUrl } from "./seoHead";
 
@@ -285,19 +286,20 @@ function renderArticleNavBlock(articles: ArticleMeta[], category: string, slug: 
 }
 
 function renderArticleHtml(template: string, vars: ArticleTemplateVars) {
-  return template
-    .replaceAll("{{title}}", vars.title)
-    .replaceAll("{{description}}", vars.description)
-    .replaceAll("{{category}}", vars.category)
-    .replaceAll("{{categoryArchivePath}}", vars.categoryArchivePath)
-    .replaceAll("{{slug}}", vars.slug)
-    .replaceAll("{{dateFormatted}}", vars.dateFormatted)
-    .replaceAll("{{dateIso}}", vars.dateIso)
-    .replaceAll("{{updatedBlock}}", vars.updatedBlock)
-    .replaceAll("{{tocBlock}}", vars.tocBlock)
-    .replaceAll("{{content}}", vars.content)
-    .replaceAll("{{articleNavBlock}}", vars.articleNavBlock)
-    .replaceAll("{{seoHead}}", vars.seoHead);
+  return applyTemplateTokens(template, {
+    "{{title}}": vars.title,
+    "{{description}}": vars.description,
+    "{{category}}": vars.category,
+    "{{categoryArchivePath}}": vars.categoryArchivePath,
+    "{{slug}}": vars.slug,
+    "{{dateFormatted}}": vars.dateFormatted,
+    "{{dateIso}}": vars.dateIso,
+    "{{updatedBlock}}": vars.updatedBlock,
+    "{{tocBlock}}": vars.tocBlock,
+    "{{content}}": vars.content,
+    "{{articleNavBlock}}": vars.articleNavBlock,
+    "{{seoHead}}": vars.seoHead,
+  });
 }
 
 async function readTemplate(): Promise<string> {
